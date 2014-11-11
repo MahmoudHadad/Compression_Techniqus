@@ -9,18 +9,18 @@ public class Main {
 	{
 		
 		//System.out.println(Integer.toBinaryString( (int)'a' ) );
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		a.add(9);
-		a.add(5);
-		a.add(7);
-		ArrayList<String> s = new ArrayList<String>();
-		s.add("9");
-		s.add("5");
-		s.add("7");
-		StandardHuffman.quickSort(s, a);
-		
-		System.out.println( a + "\n" + s);
-		
+//		ArrayList<Integer> a = new ArrayList<Integer>();
+//		a.add(9);
+//		a.add(5);
+//		a.add(7);
+//		ArrayList<String> s = new ArrayList<String>();
+//		s.add("9");
+//		s.add("5");
+//		s.add("7");
+//		StandardHuffman.quickSort(s, a);
+//		
+//		System.out.println( a + "\n" + s);
+		System.out.println(StandardHuffman.compress("aaaaaabbbcc"));
 		
 		
 		

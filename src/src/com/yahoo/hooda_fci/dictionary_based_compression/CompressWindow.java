@@ -156,7 +156,7 @@ public class CompressWindow extends JFrame{
 		
 		try {
 			File dest = chooseOutputFile.getSelectedFile();
-			destinationFile = new File(dest.getPath()+"\\compresed.txt");
+			destinationFile = new File(dest.getPath()+"\\compressed_"+sourceFile.getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "this");

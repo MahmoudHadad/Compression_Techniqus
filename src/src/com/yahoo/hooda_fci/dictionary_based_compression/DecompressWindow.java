@@ -151,7 +151,7 @@ public class DecompressWindow extends JFrame{
 		sourceFile = chooseInputFile.getSelectedFile();
 		try {
 			File dest = chooseOutputFile.getSelectedFile();
-			destinationFile = new File(dest.getPath()+"\\Decompresed.txt");
+			destinationFile = new File(dest.getPath()+"\\decompressed_"+sourceFile.getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "this");
