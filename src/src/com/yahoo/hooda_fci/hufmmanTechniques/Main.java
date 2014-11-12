@@ -29,11 +29,11 @@ public class Main {
 //		StandardHuffman.quickSort(s, a);
 //		
 //		System.out.println( a + "\n" + s);
-		StandardHuffman.compress(DealWithFiles.readFile(new File("D:\\Repositories\\src.txt")).toString(), new File("D:\\Repositories\\try.txt"));
-		
-		System.out.println(StandardHuffman.deCompress( new File("D:\\Repositories\\try.txt") ) );
-		
-		
+//		StandardHuffman.compress(DealWithFiles.readFile(new File("D:\\Repositories\\src.txt")).toString(), new File("D:\\Repositories\\try.txt"));
+//		
+//		System.out.println(StandardHuffman.deCompress( new File("D:\\Repositories\\try.txt") ) );
+//		
+		MainWindow mw = new MainWindow();
 	
 		
 		

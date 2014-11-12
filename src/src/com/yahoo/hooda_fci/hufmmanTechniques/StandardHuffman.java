@@ -81,9 +81,9 @@ public class StandardHuffman {
 
 		Map <Character , String> charsAndCodes = generateCodes(chars, probs);
 
-		for (Character key: charsAndCodes.keySet()) {
-			System.out.println(key + "/" + charsAndCodes.get(key));
-		}
+//		for (Character key: charsAndCodes.keySet()) {
+//			System.out.println(key + "/" + charsAndCodes.get(key));
+//		}
 
 		StringBuilder result = new StringBuilder("");
 		// create compressed data
@@ -130,7 +130,7 @@ public class StandardHuffman {
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public static String deCompress ( File outPut )
+	public static String deCompress ( File input )
 	{
 		StringBuilder result = new StringBuilder("");
 		StringBuilder codes = new StringBuilder("");
@@ -140,7 +140,7 @@ public class StandardHuffman {
 		
 		try 
 		{
-			FileInputStream fis = new FileInputStream(outPut);
+			FileInputStream fis = new FileInputStream(input);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
 			numOfsymbols = ois.readInt();
@@ -188,15 +188,15 @@ public class StandardHuffman {
 		Map <Character , String> charsAndCodes = generateCodes(chars, probs);
 		System.out.println(chars);
 		System.out.println(probs);
-		for (Character key: charsAndCodes.keySet()) {
-			System.out.println(key + "/" + charsAndCodes.get(key));
-		}
+//		for (Character key: charsAndCodes.keySet()) {
+//			System.out.println(key + "/" + charsAndCodes.get(key));
+//		}
 		
 		String curCode="";		
 		for(int i=0;i<codes.length();i++)
 		{
 			curCode = curCode + codes.charAt(i);
-			System.out.println("curcode"+curCode);
+			//System.out.println("curcode"+curCode);
 			
 			if(charsAndCodes.containsValue(curCode))
 			{
