@@ -1,4 +1,4 @@
-package com.yahoo.hooda_fci.dictionary_based_compression;
+package com.yahoo.hooda_fci.hufmmanTechniques;
 
 import java.io.*;
 
