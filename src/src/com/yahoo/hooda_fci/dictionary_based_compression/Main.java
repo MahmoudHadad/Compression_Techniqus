@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-		MainWindow wc = new MainWindow();
+		DictionaryMainWindow wc = new DictionaryMainWindow();
 		
 //		Scanner sc = new Scanner(System.in);
 //		

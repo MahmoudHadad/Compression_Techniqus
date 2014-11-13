@@ -33,7 +33,7 @@ public class Main {
 //		
 //		System.out.println(StandardHuffman.deCompress( new File("D:\\Repositories\\try.txt") ) );
 //		
-		MainWindow mw = new MainWindow();
+		HuffmanMainWindow mw = new HuffmanMainWindow();
 	
 		
 		
