@@ -81,9 +81,9 @@ public class StandardHuffman {
 
 		Map <Character , String> charsAndCodes = generateCodes(chars, probs);
 
-//		for (Character key: charsAndCodes.keySet()) {
-//			System.out.println(key + "/" + charsAndCodes.get(key));
-//		}
+		for (Character key: charsAndCodes.keySet()) {
+			System.out.println(key + "/" + charsAndCodes.get(key));
+		}
 
 		StringBuilder result = new StringBuilder("");
 		// create compressed data
@@ -239,9 +239,9 @@ public class StandardHuffman {
 			clonechars.set(0, "null"+clonechars.get(0));
 		else
 			clonechars.set(1, "null"+clonechars.get(1));
-		// final 2 sets 
-		//		for(int i=0;i<clonechars.size();i++)
-		//			System.out.println(clonechars.get(i) + "__" + cloneprobs.get(i));
+		 //final 2 sets 
+				for(int i=0;i<clonechars.size();i++)
+					System.out.println(clonechars.get(i) + "__" + cloneprobs.get(i));
 		// generate codes
 		Map <Character , String> charsAndCodes = new HashMap<Character , String>();
 
@@ -264,9 +264,9 @@ public class StandardHuffman {
 		//				System.out.println(chars.get(i) + "__" + probs.get(i));
 
 
-		chars.set( 1 , chars.get( 1 ) +  chars.get( 0 ) );
+		chars.set( 1 , chars.get( 0 ) +  chars.get( 1 ) );
 
-		probs.set( 1 , probs.get( 1 ) +  probs.get( 0 ) );
+		probs.set( 1 , probs.get( 0 ) +  probs.get( 1 ) );
 
 		chars.remove(0);
 		probs.remove(0);
