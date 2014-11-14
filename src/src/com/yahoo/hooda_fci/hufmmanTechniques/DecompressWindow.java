@@ -20,6 +20,7 @@ public class DecompressWindow extends JFrame{
 	private File sourceFile;
 	private File destinationFile;
 	private JLabel label;
+	private JButton browseB ;
 	
 	DecompressWindow()
 	{
@@ -56,7 +57,11 @@ public class DecompressWindow extends JFrame{
 		deCompressB = new JButton("Decompress");
 		deCompressB.setFont(new Font("Tahoma", Font.BOLD, 12));
 		deCompressB.setBounds(158, 66, 111, 23);
-		
+
+		//browse
+		browseB = new JButton("Browse");
+		browseB.setFont(new Font("Tahoma", Font.BOLD, 12));
+		browseB.setBounds(305, 66, 101, 23);
 
 		label = new JLabel("Standard Huffman");
 		label.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -102,7 +107,7 @@ public class DecompressWindow extends JFrame{
 		add(modifiedRB);
 		add(advancedRB);
 		add(deCompressB);
-
+		add(browseB);
 
 		// Actions
 		deCompressB.addActionListener(new ActionListener() {
@@ -111,15 +116,15 @@ public class DecompressWindow extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 
 				if(standardRB.isSelected())
-				{
-					
+				{	
 					String x = StandardHuffman.deCompress(sourceFile);
 					DealWithFiles.printOnFile(destinationFile, x);
 				}
 
 				else if (modifiedRB.isSelected())
 				{
-
+					String x = ModifiedHuffman.deCompress(sourceFile);
+					DealWithFiles.printOnFile(destinationFile, x);	
 				}
 
 				else
@@ -133,6 +138,38 @@ public class DecompressWindow extends JFrame{
 
 		});
 		
+		browseB.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				chooseInputFile = new JFileChooser("D:");
+				chooseInputFile.setDialogTitle("Choose file to compress");
+				
+				
+				while(! (chooseInputFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION))
+					JOptionPane.showMessageDialog(null,"Error" , "No file is selected", JOptionPane.ERROR_MESSAGE);
+				
+				chooseOutputFile = new JFileChooser("D:");
+				chooseOutputFile.setDialogTitle("Choose Destination path");
+				chooseOutputFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				
+				while(! (chooseOutputFile.showSaveDialog(null) == JFileChooser.APPROVE_OPTION))
+					JOptionPane.showMessageDialog(null,"Error" , "No file is selected", JOptionPane.ERROR_MESSAGE);
+				
+				sourceFile = chooseInputFile.getSelectedFile();
+				
+				try {
+					File dest = chooseOutputFile.getSelectedFile();
+					destinationFile = new File(dest.getPath()+"\\compressed_"+sourceFile.getName());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "this");
+				}
+			}
+		});
+		
+
 		// Select Files
 		chooseInputFile = new JFileChooser("D:");
 		chooseInputFile.setDialogTitle("Choose file to Decompress");
@@ -155,7 +192,21 @@ public class DecompressWindow extends JFrame{
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "this");
+			JOptionPane.showMessageDialog(null, "can't create file in this location check your access and choose another destination ");
+			while(! (chooseOutputFile.showSaveDialog(this) == JFileChooser.APPROVE_OPTION))
+				JOptionPane.showMessageDialog(this,"Error" , "No file is selected", JOptionPane.ERROR_MESSAGE);
+			
+			sourceFile = chooseInputFile.getSelectedFile();
+			try {
+				File dest = chooseOutputFile.getSelectedFile();
+				destinationFile = new File(dest.getPath()+"\\decompressed_"+sourceFile.getName());
+				destinationFile.createNewFile();
+			} 
+			catch (Exception ee) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "can't create file in this location check your access and choose another destination ");
+				
+			}
 		}
 		
 		

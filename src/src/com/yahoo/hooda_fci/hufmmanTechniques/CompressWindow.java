@@ -11,6 +11,7 @@ import javax.swing.*;
 public class CompressWindow extends JFrame{
 	
 	private JButton compressB ;
+	private JButton browseB ;
 	private JRadioButton standardRB;
 	private JRadioButton modifiedRB;
 	private JRadioButton advancedRB;
@@ -21,7 +22,7 @@ public class CompressWindow extends JFrame{
 	private File destinationFile;
 	
 	private JLabel label;
-	
+	String tech="Standard Huffman";
 	CompressWindow()
 	{
 		super("Compression window");
@@ -59,6 +60,12 @@ public class CompressWindow extends JFrame{
 		compressB.setFont(new Font("Tahoma", Font.BOLD, 12));
 		compressB.setBounds(158, 66, 101, 23);
 		
+		//browse
+		browseB = new JButton("Browse");
+		browseB.setFont(new Font("Tahoma", Font.BOLD, 12));
+		browseB.setBounds(305, 66, 101, 23);
+		
+		//label
 		label = new JLabel("Standard Huffman");
 		label.setFont(new Font("Tahoma", Font.BOLD, 18));
 		label.setBounds(135, 66+23+10, 181, 23);
@@ -76,7 +83,7 @@ public class CompressWindow extends JFrame{
 		add(advancedRB);
 		add(compressB);
 		add(label);
-		
+		add(browseB);
 		// Actions
 		standardRB.addActionListener( new ActionListener() {
 			
@@ -84,6 +91,7 @@ public class CompressWindow extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				label.setText("Standard Huffman");
+				tech="Standard Huffman";
 			}
 		});
 		
@@ -93,6 +101,7 @@ public class CompressWindow extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				label.setText("Modified Huffman");
+				tech="Modified Huffman";
 			}
 		});
 		
@@ -102,6 +111,7 @@ public class CompressWindow extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				label.setText("Advanced Huffman");
+				tech="Advanced Huffman";
 			}
 		});
 		
@@ -117,7 +127,7 @@ public class CompressWindow extends JFrame{
 				
 				else if (modifiedRB.isSelected())
 				{
-					
+					ModifiedHuffman.compress(DealWithFiles.readFile(sourceFile).toString(), destinationFile);
 				}
 				
 				else
@@ -130,6 +140,37 @@ public class CompressWindow extends JFrame{
 			
 			
 			
+		});
+		
+		browseB.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				chooseInputFile = new JFileChooser("D:");
+				chooseInputFile.setDialogTitle("Choose file to compress");
+				
+				
+				while(! (chooseInputFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION))
+					JOptionPane.showMessageDialog(null,"Error" , "No file is selected", JOptionPane.ERROR_MESSAGE);
+				
+				chooseOutputFile = new JFileChooser("D:");
+				chooseOutputFile.setDialogTitle("Choose Destination path");
+				chooseOutputFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				
+				while(! (chooseOutputFile.showSaveDialog(null) == JFileChooser.APPROVE_OPTION))
+					JOptionPane.showMessageDialog(null,"Error" , "No file is selected", JOptionPane.ERROR_MESSAGE);
+				
+				sourceFile = chooseInputFile.getSelectedFile();
+				
+				try {
+					File dest = chooseOutputFile.getSelectedFile();
+					destinationFile = new File(dest.getPath()+"\\compressed_"+sourceFile.getName());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "this");
+				}
+			}
 		});
 		
 		chooseInputFile = new JFileChooser("D:");

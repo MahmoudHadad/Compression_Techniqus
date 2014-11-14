@@ -1,6 +1,5 @@
 package com.yahoo.hooda_fci.hufmmanTechniques;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StandardHuffman {
+public class ModifiedHuffman {
 
 	public static void compress ( String data , File outPut)
 	{
@@ -27,24 +26,36 @@ public class StandardHuffman {
 			if( chars.contains( Character.toString(data.charAt(i) ) ) )
 			{
 				int f = chars.indexOf( Character.toString(data.charAt(i) ) ) ;
-
-				probs.set(f, probs.get(f) + 1 );
+				probs.set(f, probs.get(f) + (float)1 / dataLength  );
 
 			}
-
 			else 
 			{
 				chars.add( Character.toString(data.charAt(i) ) );
-				probs.add((float) 1.0);
+				probs.add((float) 1 / dataLength );
 			}
 
 		}
-		// convert number of ocurrance to probabilities
-		for(int i=0;i<probs.size();i++)
-			probs.set(i, probs.get(i) /  dataLength);
+		
 
-		// sort data 
-		quickSort(chars, probs);
+		
+		float others = 0;
+		
+		for (int i = 0; i < probs.size(); ) {
+			if(probs.get(i)<0.01)
+			{
+				others += probs.get(i);
+				probs.remove(i);
+				chars.remove(i);
+			}
+			else 
+				i++;
+		}
+		
+		probs.add(others);
+		chars.add("~");
+
+
 
 		////////////////////////
 		// Save each char with its probability on the file
@@ -82,16 +93,21 @@ public class StandardHuffman {
 		chars.add("null");
 		probs.add((float) 0);
 		
+		// sort data 
+		quickSort(chars, probs);
+		
 		Map <String , String> charsAndCodes = new HashMap<String , String>();
 		generateCodes( (ArrayList<String>)chars.clone(), (ArrayList<Float>) probs.clone() , charsAndCodes);
 		
 		// view each char and its prob
+//		System.out.println("lists data");
 //		for (int i = 0; i < chars.size(); i++) {
 //			System.out.println(chars.get(i) + "_" + probs.get(i));
 //		}
 		
 		
 		// // view each char and its code 
+		System.out.println("map data");
 		for (String key: charsAndCodes.keySet()) {
 			System.out.println(key + "/" + charsAndCodes.get(key));
 		}
@@ -100,13 +116,28 @@ public class StandardHuffman {
 		// create compressed data
 		for (int i = 0; i < data.length(); i++) 
 		{
-			result.append((String) charsAndCodes.get( "" + data.charAt(i) ) );
+			if(charsAndCodes.containsKey("" + data.charAt(i)))
+			{
+				result.append((String) charsAndCodes.get( "" + data.charAt(i) ) );
+			}
+			else
+			{
+				result.append((String) charsAndCodes.get( "~" ) );
+				
+				String ascii = Integer.toBinaryString(data.charAt(i)); 
+				while(ascii.length()<7)
+					ascii="0"+ ascii;
+				
+				result.append( ascii );
+			}
+			
 		}
 		
 		// resize it to be divisible by 31  to be divided into integers
 		if(result.length() % 31 !=0)
 			result.append((String) charsAndCodes.get( "null" ) );
-
+		
+		
 		while(result.length() % 31 !=0)
 			result.append("0");
 		
@@ -119,7 +150,7 @@ public class StandardHuffman {
 			{
 				int comp = Integer.parseInt(result.substring( i, i+31 ),2);
 				oos.writeInt(comp);
-				//System.out.println(i+"_"+comp);
+//				System.out.println(i+"_"+comp);
 //				System.out.println("_length after adding comp"+outPut.length());
 			}
 			oos.close();
@@ -141,6 +172,7 @@ public class StandardHuffman {
 
 	public static String deCompress ( File input )
 	{
+		
 		StringBuilder result = new StringBuilder("");
 		StringBuilder codes = new StringBuilder("");
 		ArrayList<String>chars = new ArrayList<String>();
@@ -185,8 +217,8 @@ public class StandardHuffman {
 			
 			ois.close();
 			fis.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -195,7 +227,7 @@ public class StandardHuffman {
 		// get code for each char
 		chars.add("null");
 		probs.add((float) 0);
-		
+		quickSort(chars, probs);
 		Map <String , String> charsAndCodes = new HashMap<String , String>();
 		
 		generateCodes(chars, probs,charsAndCodes);
@@ -220,17 +252,24 @@ public class StandardHuffman {
 					if(charsAndCodes.get(key).equals(curCode))
 						key2=key;
 				}
-				
-				if(key2.equals( "null" ) )
+
+				if(key2.equals( "null" ))
 					break;
-				
+
+				if(key2.equals("~"))
+				{
+					curCode = codes.substring(i+1, i+8);
+					i+=7;
+					
+					key2 = ""+(char)Integer.parseInt(curCode, 2);
+					System.out.println("others_"+key2);
+				}
 				result.append(key2);
 				curCode="";
 			}
+			
 		}
-		
-		
-		
+
 		return result.toString();
 	}
 

@@ -16,82 +16,53 @@ public class Main {
 	
 	public static void main (String [] args)
 	{
-		
-		//System.out.println(Integer.toBinaryString( (int)'a' ) );
-//		ArrayList<Integer> a = new ArrayList<Integer>();
-//		a.add(9);
-//		a.add(5);
-//		a.add(7);
-//		ArrayList<String> s = new ArrayList<String>();
-//		s.add("9");
-//		s.add("5");
-//		s.add("7");
-//		StandardHuffman.quickSort(s, a);
-//		
-//		System.out.println( a + "\n" + s);
-//		StandardHuffman.compress(DealWithFiles.readFile(new File("D:\\Repositories\\src.txt")).toString(), new File("D:\\Repositories\\try.txt"));
-//		
-//		System.out.println(StandardHuffman.deCompress( new File("D:\\Repositories\\try.txt") ) );
-//		
+
 		HuffmanMainWindow mw = new HuffmanMainWindow();
-	
+		
+		//System.out.println(Integer.toBinaryString(' '));
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		File outPut = new File("D:\\Repositories\\try.txt");
-//		try 
-//		{
-//			FileOutputStream fos = new FileOutputStream(outPut ,  true);
-//			ObjectOutputStream oos = new ObjectOutputStream(fos);
+//		File outPut = new File("D:\\Repositories\\dest.txt");
+//		ModifiedHuffman.compress("aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbmmmmmmmmmcaaaaaaaaaaaaaaaaaaaaaaaaaaaaazxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxymmmmmmmmmmmmmmmmmmmmmmmmmi", outPut);
 //		
-//			oos.writeInt( 10 );
-//			oos.writeChar(  'a');
-//			oos.writeFloat((float)0.2);
-//			oos.writeChar(  'b');
-//			oos.writeFloat((float)0.3);
-//			oos.writeChar(  'c');
-//			oos.writeFloat((float)0.5);
-//			oos.writeChar(  'd');
-//			oos.writeFloat((float)0.1);
-//			
-//			System.out.println("length after adding "+outPut.length());
-//			
-//			oos.close();
-//			fos.close();
-//			System.out.println("length after adding "+outPut.length());
-//		} 
-//		catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+//		String d = ModifiedHuffman.deCompress(outPut);
+//		System.out.println(d);
+		
 //		try {
 //			FileInputStream fis = new FileInputStream(outPut);
 //			ObjectInputStream ois = new ObjectInputStream(fis);
-//			System.out.println(ois.readInt());
+//			int n = ois.readInt();
+//			System.out.println(n);
 //			
-//			System.out.println(ois.readChar());
-//			System.out.println(ois.readFloat());
+//			for (int i = 0; i < n; i++) {
+//				System.out.println(ois.readChar());
+//				System.out.println(ois.readFloat());
+//			}
+// 
+//			while (true)
+//			{
+//				try
+//				{
+//					System.out.println(ois.readInt());
+//				}
+//				catch(Exception e)
+//				{
+//					break;
+//				}
+//			}
 //			
-//			System.out.println(ois.readChar());
-//			System.out.println(ois.readFloat());
-//			
-//			System.out.println(ois.readChar());
-//			System.out.println(ois.readFloat());
-//			
-//			System.out.println(ois.readChar());
-//			System.out.println(ois.readFloat());
+////			System.out.println(ois.readChar());
+////			System.out.println(ois.readFloat());
+////			
+////			System.out.println(ois.readChar());
+////			System.out.println(ois.readFloat());
+////			
+////			System.out.println(ois.readChar());
+////			System.out.println(ois.readFloat());
+////			
+////			System.out.println(ois.readChar());
+////			System.out.println(ois.readFloat());
+//		
 //			
 //			ois.close();
 //			fis.close();
@@ -99,8 +70,7 @@ public class Main {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		
-//		
+//	
 		
 	}
 	
